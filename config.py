@@ -2,6 +2,7 @@ import os
 
 
 class Config:
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     #secret key
     SECRET_KEY = os.environ.get('SECRET_KEY')
