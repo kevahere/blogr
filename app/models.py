@@ -17,8 +17,8 @@ class User(UserMixin,db.Model):
     pass_secure = db.Column(db.String(255))
     password_hash = db.Column(db.String(255))
 
-    #Definig user to pitch relationship
-    pitch = db.relationship('Pitch',backref = 'user',lazy = 'dynamic')
+    #Definig user to blog relationship
+    blog = db.relationship('Blog',backref = 'user',lazy = 'dynamic')
 
     #Create user to comment relationship
     comment = db.relationship('Comment', backref='main_user', lazy='dynamic')
@@ -45,26 +45,26 @@ class Category(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(255))
-    pitch = db.relationship('Pitch', backref='parent_category', lazy='dynamic')
+    blog = db.relationship('Blog', backref='parent_category', lazy='dynamic')
 
     def __repr__(self):
         return f'Category {self.name}'
 
-class Pitch(db.Model):
-    __tablename__ = 'pitches'
+class Blog(db.Model):
+    __tablename__ = 'blogs'
 
     id =  db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(255))
-    pitch_body = db.Column(db.String)
+    blog_body = db.Column(db.String)
     body = db.Column(db.String)
     #Defining user relationship
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     #Define category relationship
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
     #Defining one relationship with comments
-    comments = db.relationship('Comment', backref="main_pitch", cascade="all, delete-orphan", lazy="dynamic")
+    comments = db.relationship('Comment', backref="main_blog", cascade="all, delete-orphan", lazy="dynamic")
     def __repr__(self):
-        return f'Pitch {self.title}'
+        return f'Blog {self.title}'
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -72,8 +72,8 @@ class Comment(db.Model):
     id =  db.Column(db.Integer, primary_key = True)
     author = db.Column(db.String(255))
     comment = db.Column(db.String)
-    # Defining the foreign key from the relationship between a pitch and a comment
-    pitch_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
+    # Defining the foreign key from the relationship between a blog and a comment
+    blog_id = db.Column(db.Integer, db.ForeignKey("blogs.id"))
 
     # Defining the foreign key from the relationship between a user and a comment
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
