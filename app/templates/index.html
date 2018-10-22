@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{%block content%}
+<div class="container">
+  <div class="row">
+    <h1>Shoot your shot!</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card homecard" style="width: 48rem; height:30rem;">
+        <img class="card-img-top" src="{{url_for('static', filename='product.jpeg')}}" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text" style="color:white">Product pitch</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"> </div>
+    <div class="col-md-5">
+      <div class="card homecard" style="width: 48rem; height:30rem;">
+        <img class="card-img-top" src="{{url_for('static', filename='heart.jpeg')}}" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text" style="color:white">Pick up lines</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
